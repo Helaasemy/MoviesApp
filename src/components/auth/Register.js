@@ -16,7 +16,7 @@ class Register extends React.Component {
       <React.Fragment>
         <Grid textAlign="center" verticalAlign="middle" className="app">
           <Grid.Column style={{ maxWidth: 450 }}>
-            <Header as="h2" icon color="orange" textAlign="center">
+            <Header as="h2" textAlign="center">
               <Icon name="puzzle piece" color="orange" />
               Register to Chat
             </Header>
@@ -64,7 +64,7 @@ class Register extends React.Component {
               </Segment>
             </Form>
             <Message>
-              Already a user? <link to="/login">Login</link>
+              Already a user? <Link to="/login">Login</Link>
             </Message>
           </Grid.Column>
         </Grid>
