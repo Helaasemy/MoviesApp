@@ -8,40 +8,47 @@ import {
   Message,
   Icon
 } from "semantic-ui-react";
-import firebase from  '../../firebase';
+import firebase from "../../firebase";
 import { Link } from "react-router-dom";
-
 
 class Register extends React.Component {
   state = {
-    username:'',
-    email:'',
-    password:'',
-    passwordConfirmation:'',
-  }
+    username: "",
+    email: "",
+    password: "",
+    passwordConfirmation: ""
+  };
 
+  formValid = () => {
+    if (this.formEmpty(this.state)) {
+    } else if (!this.passwordValidation()) {
+    } else {
+      return true;
+    }
+  };
+  formEmpty = { username, email, password, passwordConfirmation };
 
   handleChange = event => {
-    this.setState({[event.target.name]: event.target.value});
-  }
-  handleSubmit =  event => {
-    event.preventDefault();
-    firebase 
-      .auth()
-      .createUserWithEmailAndPassword(this.state.email, this.state.password)
-      .then(createdUser => {
-        console.log(createdUser);
-        
-      })
-  }
+    this.setState({ [event.target.name]: event.target.value });
+  };
+  handleSubmit = event => {
+    if (this.formValid()) {
+      event.preventDefault();
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(this.state.email, this.state.password)
+        .then(createdUser => {
+          console.log(createdUser);
+        });
+    }
+  };
   render() {
-    const  { username, email,  password, passwordConfirmation } = this.state;
+    const { username, email, password, passwordConfirmation } = this.state;
     return (
       <React.Fragment>
         <Grid textAlign="center" verticalAlign="middle" className="app">
           <Grid.Column style={{ maxWidth: 450 }}>
             <Header as="h2" textAlign="center">
-            
               Register to Chat
             </Header>
             <Form size="large" onSubmit={this.handleSubmit}>
@@ -53,7 +60,6 @@ class Register extends React.Component {
                   iconPosition="left"
                   placeholder="Username"
                   onChange={this.handleChange}
-                
                   type="text"
                 />
                 <Form.Input
@@ -63,7 +69,6 @@ class Register extends React.Component {
                   iconPosition="left"
                   placeholder="Email Address"
                   onChange={this.handleChange}
-                  
                   type="email"
                 />
                 <Form.Input
@@ -73,7 +78,6 @@ class Register extends React.Component {
                   iconPosition="left"
                   placeholder="Password"
                   onChange={this.handleChange}
-                
                   type="password"
                 />
                 <Form.Input
@@ -83,7 +87,6 @@ class Register extends React.Component {
                   iconPosition="left"
                   placeholder="Password Confirmation"
                   onChange={this.handleChange}
-                   
                   type="password"
                 />
                 <Button color="orange" fluid size="large">
