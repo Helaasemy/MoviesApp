@@ -35,6 +35,7 @@ class Register extends React.Component {
       })
   }
   render() {
+    const  { username, email,  password, passwordConfirmation } = this.state;
     return (
       <React.Fragment>
         <Grid textAlign="center" verticalAlign="middle" className="app">
@@ -43,7 +44,7 @@ class Register extends React.Component {
             
               Register to Chat
             </Header>
-            <Form size="large">
+            <Form size="large" onSubmit={this.handleSubmit}>
               <Segment stacked>
                 <Form.Input
                   fluid
@@ -52,6 +53,7 @@ class Register extends React.Component {
                   iconPosition="left"
                   placeholder="Username"
                   onChange={this.handleChange}
+                
                   type="text"
                 />
                 <Form.Input
@@ -61,6 +63,7 @@ class Register extends React.Component {
                   iconPosition="left"
                   placeholder="Email Address"
                   onChange={this.handleChange}
+                  
                   type="email"
                 />
                 <Form.Input
@@ -70,6 +73,7 @@ class Register extends React.Component {
                   iconPosition="left"
                   placeholder="Password"
                   onChange={this.handleChange}
+                
                   type="password"
                 />
                 <Form.Input
@@ -79,6 +83,7 @@ class Register extends React.Component {
                   iconPosition="left"
                   placeholder="Password Confirmation"
                   onChange={this.handleChange}
+                   
                   type="password"
                 />
                 <Button color="orange" fluid size="large">
