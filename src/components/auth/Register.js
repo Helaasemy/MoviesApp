@@ -26,11 +26,11 @@ class Register extends React.Component {
 
     if (this.formEmpty(this.state)) {
       error = { message:  'Fill all  the fields' };
-      this.setState({ errors: error.concat(error) });
+      this.setState({ errors: errors.concat(error) });
       return false;
-    } else if (!this.passwordValidation(this.state)) {
+    } else if (!this.passwordValid(this.state)) {
       error = { message:  'Password Is  Invalid' };
-      this.setState({ errors: error.concat(error) });
+      this.setState({ errors: errors.concat(error) });
       return false;
     } else {
       return true;
@@ -46,13 +46,15 @@ class Register extends React.Component {
    if (password.length < 6   ||  passwordConfirmation.length < 6  ) {
 
      return false;
-   } else if  ( password != passwordConfirmation) {
+   } else if  ( password !== passwordConfirmation) {
       return false;
    } else {
      return true;
    }
 
   }
+
+  displayingErrors =  errors => errors.map((error, i) => <p key={i}>{error.message}</p>);
 
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
@@ -69,7 +71,7 @@ class Register extends React.Component {
     }
   };
   render() {
-    const { username, email, password, passwordConfirmation } = this.state;
+    const { username, email, password, passwordConfirmation, errors } = this.state;
     return (
       <React.Fragment>
         <Grid textAlign="center" verticalAlign="middle" className="app">
@@ -120,6 +122,12 @@ class Register extends React.Component {
                 </Button>
               </Segment>
             </Form>
+            {errors.length > 0 && (
+              <Message error>
+                <h3>error</h3>
+                {this.displayingErrors(errors)}
+              </Message>
+            )}
             <Message>
               Already a user? <Link to="/login">Login</Link>
             </Message>
