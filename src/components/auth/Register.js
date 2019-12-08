@@ -1,4 +1,5 @@
 import React from "react";
+import md5 from "md5";
 import {
   Grid,
   Form,
@@ -10,6 +11,7 @@ import {
 } from "semantic-ui-react";
 import firebase from "../../firebase";
 import { Link } from "react-router-dom";
+import { database } from "firebase";
 
 class Register extends React.Component {
   state = {
@@ -18,7 +20,8 @@ class Register extends React.Component {
     password: "",
     passwordConfirmation: "",
     errors: [],
-    loading: false
+    loading: false,
+    usersRef: firebase.database().ref("users")
   };
 
   formValid = () => {
@@ -72,7 +75,20 @@ class Register extends React.Component {
         .createUserWithEmailAndPassword(this.state.email, this.state.password)
         .then(createdUser => {
           console.log(createdUser);
-          this.setState({ loading: false });
+          createdUser.user
+            .updateProfile({
+              displayName: this.state.username
+            })
+            .then(() => {
+              this.savedUser(createdUser).then(() => {
+                console.log("user saved");
+                this.setState({ loading: false });
+              });
+            })
+            .catch(err => {
+              console.error(err);
+              this.setState({ loading: false });
+            });
         })
         .catch(err => {
           console.error(err);
@@ -80,11 +96,15 @@ class Register extends React.Component {
         });
     }
   };
+
+  savedUser = createdUser => {
+    return this.state.usersRef.child(createdUser.user.uid).set({
+      name: createdUser.user.displayName
+    });
+  };
+
   render() {
-    const {
-      errors,
-      loading
-    } = this.state;
+    const { errors, loading } = this.state;
     return (
       <React.Fragment>
         <Grid textAlign="center" verticalAlign="middle" className="app">
