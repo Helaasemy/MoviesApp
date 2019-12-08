@@ -18,6 +18,7 @@ class Register extends React.Component {
     password: "",
     passwordConfirmation: "",
     errors: [],
+    loading: false
   };
 
   formValid = () => {
@@ -25,11 +26,11 @@ class Register extends React.Component {
     let error;
 
     if (this.formEmpty(this.state)) {
-      error = { message:  'Fill all  the fields' };
+      error = { message: "Fill all  the fields" };
       this.setState({ errors: errors.concat(error) });
       return false;
     } else if (!this.passwordValid(this.state)) {
-      error = { message:  'Password Is  Invalid' };
+      error = { message: "Password Is  Invalid" };
       this.setState({ errors: errors.concat(error) });
       return false;
     } else {
@@ -37,41 +38,53 @@ class Register extends React.Component {
     }
   };
 
-
   formEmpty = ({ username, email, password, passwordConfirmation }) => {
-    return !username.length || !email.length || !password.length || !passwordConfirmation.length
+    return (
+      !username.length ||
+      !email.length ||
+      !password.length ||
+      !passwordConfirmation.length
+    );
   };
 
-  passwordValid = ({ password,  passwordConfirmation }) => {
-   if (password.length < 6   ||  passwordConfirmation.length < 6  ) {
-
-     return false;
-   } else if  ( password !== passwordConfirmation) {
+  passwordValid = ({ password, passwordConfirmation }) => {
+    if (password.length < 6 || passwordConfirmation.length < 6) {
       return false;
-   } else {
-     return true;
-   }
+    } else if (password !== passwordConfirmation) {
+      return false;
+    } else {
+      return true;
+    }
+  };
 
-  }
-
-  displayingErrors =  errors => errors.map((error, i) => <p key={i}>{error.message}</p>);
+  displayingErrors = errors =>
+    errors.map((error, i) => <p key={i}>{error.message}</p>);
 
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
   handleSubmit = event => {
+    event.preventDefault();
     if (this.formValid()) {
-      event.preventDefault();
+      this.setState({ errors: [], loading: true });
       firebase
         .auth()
         .createUserWithEmailAndPassword(this.state.email, this.state.password)
         .then(createdUser => {
           console.log(createdUser);
+          this.setState({ loading: false });
+        })
+        .catch(err => {
+          console.error(err);
+          this.setState({ loading: false });
         });
     }
   };
   render() {
-    const { username, email, password, passwordConfirmation, errors } = this.state;
+    const {
+      errors,
+      loading
+    } = this.state;
     return (
       <React.Fragment>
         <Grid textAlign="center" verticalAlign="middle" className="app">
@@ -117,7 +130,13 @@ class Register extends React.Component {
                   onChange={this.handleChange}
                   type="password"
                 />
-                <Button color="orange" fluid size="large">
+                <Button
+                  disabled={loading}
+                  className={loading ? "loading" : ""}
+                  color="orange"
+                  fluid
+                  size="large"
+                >
                   Submit
                 </Button>
               </Segment>
