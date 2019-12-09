@@ -23,12 +23,15 @@ class Root extends React.Component {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.props.history.push("/");
+      } else {
+        this.props.history.push("/login")
       }
     });
   }
   render() {
     return (
       <Switch>
+
         <Route exact path="/" component={App} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
