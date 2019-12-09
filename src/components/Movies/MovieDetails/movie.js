@@ -52,9 +52,7 @@ class Movie extends Component {
             }}
           >
             <div className="row">
-              <div className="col-md-12">
-              
-              </div>
+              <div className="col-md-12"></div>
             </div>
           </div>
           <div className="container img_up">
@@ -69,13 +67,14 @@ class Movie extends Component {
               <div className="col-md-9">
                 <div className="row">
                   <div className="col-md-12">
-                  <h1 className="text-left text-white ">{movie.original_title}</h1>
+                    <h1 className="text-left text-white ">
+                      {movie.original_title}
+                    </h1>
                   </div>
                   <div className="col-md-5">
-                  <span className="badge badge-warning ">
-                            IMDB : {movie.vote_average}
-                  </span>
-                 
+                    <span className="badge badge-warning ">
+                      IMDB : {movie.vote_average}
+                    </span>
                   </div>
                   <div className="col-md-8 pt-4">
                     <p className="text-left text-white text-uppercase">
@@ -83,7 +82,6 @@ class Movie extends Component {
                     </p>
                   </div>
                 </div>
-              
               </div>
             </div>
           </div>

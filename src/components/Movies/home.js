@@ -11,7 +11,7 @@ import Search from "./search";
 import FourColGrid from "./fourColGrid";
 import Spinner from "./spinner";
 import LoadMore from "./loadMore";
-  
+
 class Home extends Component {
   state = {
     movies: [],
