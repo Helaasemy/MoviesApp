@@ -8,6 +8,8 @@ import Register from "./components/auth/Register";
 import registerServiceWorker from "./registerServiceWorker";
 import "semantic-ui-css/semantic.min.css";
 import firebase from "./firebase";
+import Movie from "./components/Movies/MovieDetails/movie";
+
 
 import {
   BrowserRouter as Router,
@@ -30,6 +32,7 @@ class Root extends React.Component {
         <Route exact path="/" component={App} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
+        <Route path="/:id" component={Movie} exact />
       </Switch>
     );
   }

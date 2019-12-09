@@ -6,12 +6,12 @@ import {
   BACKDROP_SIZE,
   POSTER_SIZE
 } from "../../apiConfig";
-import Header from "./header";
+// import Header from "./header";
 import Search from "./search";
 import FourColGrid from "./fourColGrid";
 import Spinner from "./spinner";
 import LoadMore from "./loadMore";
-
+  
 class Home extends Component {
   state = {
     movies: [],
@@ -88,7 +88,7 @@ class Home extends Component {
     } else {
       return (
         <React.Fragment>
-          <Header />
+          {/* <Header /> */}
           <Search callback={this.searching} />
           <FourColGrid dataFromParent={this.state.movies} />
           <LoadMore LoadMore_parent={this.LoadMore} />

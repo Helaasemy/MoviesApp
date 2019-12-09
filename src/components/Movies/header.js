@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { getGenres } from "../services/fakeGenreService";
-import logo from "../logo.svg";
+// import { getGenres } from "../services/fakeGenreService";
+import logo from "./logo.svg";
 
 class Header extends Component {
   state = {
