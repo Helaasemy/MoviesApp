@@ -19,7 +19,7 @@ class Search extends Component {
     return (
       <React.Fragment>
         <Grid textAlign="center" verticalAlign="middle">
-          <Grid.Column >
+          <Grid.Column>
             <Input
               value={this.state.value}
               onChange={this.doSearching}
@@ -29,7 +29,6 @@ class Search extends Component {
             />
           </Grid.Column>
         </Grid>
-       
       </React.Fragment>
     );
   }

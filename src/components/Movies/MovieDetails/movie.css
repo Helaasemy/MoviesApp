@@ -1,0 +1,10 @@
+.bg_movie{
+   height: 100vh;
+   background-repeat: no-repeat;
+   background-size: cover;
+}
+.mv_white{
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

@@ -8,8 +8,8 @@ import {
   POSTER_SIZE
 } from "../../../apiConfig";
 import Spinner from "../spinner";
-import { Input, Grid } from "semantic-ui-react";
-
+import { Image, Grid, Label } from "semantic-ui-react";
+import "./movie.css";
 
 class Movie extends Component {
   state = {
@@ -22,7 +22,7 @@ class Movie extends Component {
     const id = window.location.href.split("/").pop();
     console.log(id);
 
-    const endpoint = `${API_URL}movie/${id}?api_key=${API_KEY}`;
+    const endpoint = `${API_URL}movie/${id}?api_key=${API_KEY}&append_to_response=credits`;
     this.fetchItems(endpoint);
   }
 
@@ -47,46 +47,31 @@ class Movie extends Component {
     } else {
       return (
         <React.Fragment>
-          <Grid textAlign="center" verticalAlign="middle"
-            className="container-fluid bg_movie"
+          <Grid
+            textAlign="center"
+            verticalAlign="middle"
+            className="bg_movie"
             style={{
               backgroundImage: `linear-gradient(0deg,rgba(36, 36, 36, 0.3),rgba(36,36,36,0.6)),url(https://image.tmdb.org/t/p/original/${movie.backdrop_path})`
             }}
           >
-            <div className="row">
-              <div className="col-md-12"></div>
-            </div>
+            <Grid className="movie_cont">
+              <Grid.Row>
+                <Grid.Column width={3}></Grid.Column>
+                <Grid.Column width={3}>
+                  <Image
+                    src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
+                  />
+                </Grid.Column>
+                <Grid.Column width={9}>
+                  <h1 className="mv_white">{movie.original_title}</h1>
+                  <p className="mv_white">{movie.release_date}</p>
+                  <Label color="yellow">IMDB : {movie.vote_average}</Label>
+                  <p className="mv_white">{movie.overview}</p>
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
           </Grid>
-          <div className="container img_up">
-            <div className="row">
-              <div className="col-md-3">
-                <img
-                  src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
-                  alt=""
-                  className="movie_image"
-                />
-              </div>
-              <div className="col-md-9">
-                <div className="row">
-                  <div className="col-md-12">
-                    <h1 className="text-left text-white ">
-                      {movie.original_title}
-                    </h1>
-                  </div>
-                  <div className="col-md-5">
-                    <span className="badge badge-warning ">
-                      IMDB : {movie.vote_average}
-                    </span>
-                  </div>
-                  <div className="col-md-8 pt-4">
-                    <p className="text-left text-white text-uppercase">
-                      {movie.overview}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </React.Fragment>
       );
     }
