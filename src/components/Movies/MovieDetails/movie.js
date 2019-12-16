@@ -63,7 +63,7 @@ class Movie extends Component {
                     src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`}
                   />
                 </Grid.Column>
-                <Grid.Column width={9}>
+                <Grid.Column width={8}>
                   <h1 className="mv_white">{movie.original_title}</h1>
                   <p className="mv_white">{movie.release_date}</p>
                   <Label color="yellow">IMDB : {movie.vote_average}</Label>
