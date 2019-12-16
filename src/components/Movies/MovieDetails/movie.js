@@ -8,6 +8,8 @@ import {
   POSTER_SIZE
 } from "../../../apiConfig";
 import Spinner from "../spinner";
+import { Input, Grid } from "semantic-ui-react";
+
 
 class Movie extends Component {
   state = {
@@ -45,7 +47,7 @@ class Movie extends Component {
     } else {
       return (
         <React.Fragment>
-          <div
+          <Grid textAlign="center" verticalAlign="middle"
             className="container-fluid bg_movie"
             style={{
               backgroundImage: `linear-gradient(0deg,rgba(36, 36, 36, 0.3),rgba(36,36,36,0.6)),url(https://image.tmdb.org/t/p/original/${movie.backdrop_path})`
@@ -54,7 +56,7 @@ class Movie extends Component {
             <div className="row">
               <div className="col-md-12"></div>
             </div>
-          </div>
+          </Grid>
           <div className="container img_up">
             <div className="row">
               <div className="col-md-3">

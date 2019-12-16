@@ -1,21 +1,20 @@
 import React from "react";
+import { Button, Grid } from "semantic-ui-react";
+
 
 const LoadMore = props => {
   return (
-    <div>
-      <div className="container">
-        <div className="row">
-          <div className="col-md-12">
-            <button
-              className="btn  btn-primary text-center"
-              onClick={props.LoadMore_parent}
-            >
-              Loading more{" "}
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <React.Fragment>
+     
+        <Grid.Column textAlign="center" verticalAlign="middle">
+          <Button
+            content="LOAD MORE MOVIES"
+            secondary
+            onClick={props.LoadMore_parent}
+          />
+        </Grid.Column>
+ 
+    </React.Fragment>
   );
 };
 

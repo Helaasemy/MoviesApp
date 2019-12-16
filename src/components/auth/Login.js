@@ -11,7 +11,8 @@ import {
 } from "semantic-ui-react";
 import firebase from "../../firebase";
 import { Link } from "react-router-dom";
-import { database } from "firebase";
+import { database } from "../../firebase";
+
 
 class Login extends React.Component {
   state = {
@@ -83,7 +84,7 @@ class Login extends React.Component {
                 <Button
                   disabled={loading}
                   className={loading ? "loading" : ""}
-                  color="orange"
+                  secondary
                   fluid
                   size="large"
                 >

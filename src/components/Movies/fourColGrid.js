@@ -1,13 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./fourColGrid.css";
+import {
+  Icon
+} from "semantic-ui-react";
 
 const FourColGrid = props => {
   return (
     <React.Fragment>
       <div className="row">
         {props.dataFromParent.map(movies => (
-          <div key={movies.id} className="example-2 card">
+          <div key={movies.id} className="movie1 card ">
             <div
               className="wrapper"
               style={{
@@ -20,12 +23,13 @@ const FourColGrid = props => {
                 </div>
                 <ul className="menu-content">
                   <li>
-                    <a className="fa fa-bookmark-o"></a>
+                  <Icon  name='sort amount up' />
+                  <span>{movies.vote_average}</span>
                   </li>
                   <li>
-                    <a className="fa fa-heart-o">
+                  <Icon  name='heart' />
                       <span>{movies.vote_count}</span>
-                    </a>
+                  
                   </li>
                 </ul>
               </div>
